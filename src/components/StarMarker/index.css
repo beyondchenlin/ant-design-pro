@@ -1,0 +1,176 @@
+/**
+ * 六角星地图标记样式
+ * Neo-Chinese Tech Luxury Aesthetic
+ */
+
+.star-marker-wrapper {
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-origin: center center;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.star-marker-svg {
+  display: block;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 悬停态 - 轻微放大 + 投影加深 */
+.star-marker-hovered {
+  transform: scale(1.17);
+  filter: drop-shadow(0 4px 8px rgba(82, 196, 26, 0.4));
+}
+
+.star-marker-hovered .star-marker-path {
+  filter: drop-shadow(0 2px 4px rgba(82, 196, 26, 0.5));
+}
+
+/* 激活态 - 显著放大 + 脉冲动画 */
+.star-marker-active {
+  transform: scale(1.33);
+  animation: markerPulse 1.5s ease-in-out infinite;
+  z-index: 100;
+}
+
+.star-marker-active .star-marker-path {
+  filter: drop-shadow(0 4px 12px rgba(255, 122, 0, 0.6));
+}
+
+/* 外部光晕动画 */
+.star-marker-glow {
+  animation: glowPulse 1.5s ease-in-out infinite;
+}
+
+/* 中心点闪烁 */
+.star-marker-center {
+  animation: centerBlink 1.5s ease-in-out infinite;
+}
+
+/* 脉冲动画 - 呼吸效果 */
+@keyframes markerPulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 4px 8px rgba(255, 122, 0, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 6px 16px rgba(255, 122, 0, 0.8));
+  }
+}
+
+/* 光晕脉冲 */
+@keyframes glowPulse {
+  0%,
+  100% {
+    r: 10;
+    opacity: 0.2;
+  }
+  50% {
+    r: 12;
+    opacity: 0.4;
+  }
+}
+
+/* 中心点闪烁 */
+@keyframes centerBlink {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* 点击反馈 */
+.star-marker-wrapper:active {
+  transform: scale(0.95);
+}
+
+/* 聚合标记样式 */
+.cluster-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-hover) 100%);
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 4px 12px rgba(82, 196, 26, 0.4);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+  position: relative;
+}
+
+.cluster-marker::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  opacity: 0.2;
+  animation: clusterPulse 2s ease-in-out infinite;
+}
+
+.cluster-marker:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(82, 196, 26, 0.6);
+}
+
+.cluster-count {
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes clusterPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* 标记进入动画 */
+@keyframes markerEnter {
+  0% {
+    transform: scale(0) translateY(-20px);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2) translateY(0);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.star-marker-wrapper {
+  animation: markerEnter 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+  .star-marker-wrapper {
+    transform: scale(0.9);
+  }
+
+  .star-marker-hovered {
+    transform: scale(1.05);
+  }
+
+  .star-marker-active {
+    transform: scale(1.2);
+  }
+}

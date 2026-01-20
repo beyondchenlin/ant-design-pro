@@ -1,0 +1,289 @@
+/**
+ * 新视侧边栏菜单样式
+ * Neo-Chinese Tech Luxury Aesthetic
+ */
+
+.app-sider {
+  height: 100%;
+  background: var(--color-bg-elevated);
+  border-right: 1px solid var(--color-border-light);
+  overflow-y: auto;
+  overflow-x: hidden;
+  animation: slideInLeft 0.4s var(--ease-out);
+}
+
+/* 菜单整体样式 */
+.app-menu {
+  border-right: none;
+  background: transparent;
+  padding: 8px 0;
+}
+
+/* 菜单项基础样式 */
+.app-menu .ant-menu-item,
+.app-menu .ant-menu-submenu-title {
+  height: 40px;
+  line-height: 40px;
+  margin: 4px 8px !important;
+  padding: 0 12px !important;
+  border-radius: 4px;
+  transition: all 0.2s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 菜单项图标 */
+.app-menu .ant-menu-item .anticon,
+.app-menu .ant-menu-submenu-title .anticon {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  transition: all 0.2s var(--ease-out);
+}
+
+/* 菜单项文字容器 */
+.menu-item-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.menu-item-text {
+  font-size: 14px;
+  color: var(--color-text-primary);
+  transition: all 0.2s var(--ease-out);
+}
+
+/* 菜单项标签（VIP） */
+.menu-item-tag {
+  margin-left: auto;
+}
+
+/* VIP 标签样式 - 金色渐变 */
+.menu-vip-tag {
+  display: inline-block;
+  padding: 0 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--vip-text);
+  background: linear-gradient(135deg, var(--vip-gradient-start) 0%, var(--vip-gradient-end) 100%);
+  border: 1px solid #ffd591;
+  border-radius: 2px;
+  line-height: 16px;
+  box-shadow: 0 1px 2px rgba(255, 215, 0, 0.2);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* 悬停态 */
+.app-menu .ant-menu-item:hover,
+.app-menu .ant-menu-submenu-title:hover {
+  background: #fafafa !important;
+}
+
+.app-menu .ant-menu-item:hover::before,
+.app-menu .ant-menu-submenu-title:hover::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--brand-primary);
+  opacity: 0.3;
+  animation: slideInLeft 0.2s var(--ease-out);
+}
+
+/* 父级菜单展开态 - 玉绿色高亮 */
+.app-menu .ant-menu-submenu-selected > .ant-menu-submenu-title {
+  color: var(--brand-primary) !important;
+  background: var(--brand-primary-light) !important;
+  position: relative;
+}
+
+.app-menu .ant-menu-submenu-selected > .ant-menu-submenu-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--brand-primary);
+  animation: slideInLeft 0.3s var(--ease-out);
+}
+
+.app-menu .ant-menu-submenu-selected > .ant-menu-submenu-title .anticon {
+  color: var(--brand-primary) !important;
+}
+
+.app-menu .ant-menu-submenu-selected > .ant-menu-submenu-title .menu-item-text {
+  color: var(--brand-primary) !important;
+  font-weight: 500;
+}
+
+/* 子菜单项选中态 - 琥珀橙高亮 */
+.app-menu .ant-menu-item-selected {
+  background: linear-gradient(90deg, var(--brand-accent-light) 0%, transparent 100%) !important;
+  border-left: 3px solid var(--brand-accent) !important;
+  margin-left: 5px !important;
+  padding-left: 9px !important;
+  position: relative;
+}
+
+.app-menu .ant-menu-item-selected::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--brand-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--brand-accent-glow);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.app-menu .ant-menu-item-selected .menu-item-text {
+  color: var(--brand-accent) !important;
+  font-weight: 500;
+}
+
+.app-menu .ant-menu-item-selected .anticon {
+  color: var(--brand-accent) !important;
+}
+
+/* 子菜单容器 */
+.app-menu .ant-menu-sub {
+  background: transparent !important;
+}
+
+/* 子菜单项缩进 */
+.app-menu .ant-menu-inline .ant-menu-item {
+  padding-left: 48px !important;
+}
+
+.app-menu .ant-menu-inline .ant-menu-item::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--color-border-base);
+  border-radius: 50%;
+  transition: all 0.2s var(--ease-out);
+}
+
+.app-menu .ant-menu-inline .ant-menu-item:hover::before {
+  background: var(--brand-accent);
+  box-shadow: 0 0 4px var(--brand-accent-glow);
+}
+
+.app-menu .ant-menu-inline .ant-menu-item-selected::before {
+  background: var(--brand-accent);
+  box-shadow: 0 0 8px var(--brand-accent-glow);
+}
+
+/* 展开/收起图标 */
+.app-menu .ant-menu-submenu-arrow {
+  color: var(--color-text-tertiary);
+  transition: all 0.2s var(--ease-out);
+}
+
+.app-menu .ant-menu-submenu-open > .ant-menu-submenu-title .ant-menu-submenu-arrow {
+  color: var(--brand-primary);
+  transform: rotate(180deg);
+}
+
+/* 折叠状态 */
+.app-menu.ant-menu-inline-collapsed {
+  width: 64px;
+}
+
+.app-menu.ant-menu-inline-collapsed .ant-menu-item,
+.app-menu.ant-menu-inline-collapsed .ant-menu-submenu-title {
+  padding: 0 calc(50% - 16px / 2) !important;
+  margin: 4px 0 !important;
+}
+
+.app-menu.ant-menu-inline-collapsed .menu-item-label {
+  justify-content: center;
+}
+
+.app-menu.ant-menu-inline-collapsed .menu-item-text,
+.app-menu.ant-menu-inline-collapsed .menu-item-tag {
+  display: none;
+}
+
+/* 滚动条样式 */
+.app-sider::-webkit-scrollbar {
+  width: 6px;
+}
+
+.app-sider::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.app-sider::-webkit-scrollbar-thumb {
+  background: var(--color-border-light);
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
+.app-sider::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-base);
+}
+
+/* 菜单项激活动画 */
+@keyframes menuItemActivate {
+  0% {
+    transform: translateX(-4px);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.app-menu .ant-menu-item-selected {
+  animation: menuItemActivate 0.3s var(--ease-out);
+}
+
+/* 响应式适配 */
+@media (max-width: 992px) {
+  .app-sider {
+    position: fixed;
+    left: 0;
+    top: 48px;
+    bottom: 0;
+    z-index: var(--z-fixed);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* 暗色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .app-sider {
+    background: #141414;
+    border-right-color: #303030;
+  }
+
+  .app-menu .ant-menu-item:hover,
+  .app-menu .ant-menu-submenu-title:hover {
+    background: #1f1f1f !important;
+  }
+
+  .menu-item-text {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .app-menu .ant-menu-item .anticon,
+  .app-menu .ant-menu-submenu-title .anticon {
+    color: rgba(255, 255, 255, 0.65);
+  }
+}

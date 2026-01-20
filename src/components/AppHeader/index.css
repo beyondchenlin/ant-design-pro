@@ -1,0 +1,406 @@
+/**
+ * 新视顶部导航栏样式
+ * Neo-Chinese Tech Luxury Aesthetic
+ */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 48px;
+  padding: 0 24px;
+  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+  border-bottom: 1px solid var(--color-border-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  position: relative;
+  z-index: var(--z-sticky);
+  animation: slideInDown 0.4s var(--ease-out);
+}
+
+/* 左侧区域 */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* Logo 区域 - 品牌识别 */
+.logo-section {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  cursor: pointer;
+  transition: var(--transition-hover);
+}
+
+.logo-section:hover {
+  transform: translateY(-1px);
+}
+
+.brand-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--brand-primary);
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-hover) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(82, 196, 26, 0.1);
+  position: relative;
+}
+
+.brand-name::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--brand-primary);
+  transition: width 0.3s var(--ease-out);
+}
+
+.logo-section:hover .brand-name::after {
+  width: 100%;
+}
+
+.brand-subtitle {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.6;
+}
+
+/* 面包屑区域 */
+.breadcrumb-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background: rgba(82, 196, 26, 0.04);
+  border: 1px solid rgba(82, 196, 26, 0.1);
+  transition: var(--transition-hover);
+}
+
+.breadcrumb-section:hover {
+  background: rgba(82, 196, 26, 0.08);
+  border-color: rgba(82, 196, 26, 0.2);
+}
+
+.breadcrumb-icon {
+  font-size: 14px;
+  color: var(--brand-primary);
+}
+
+.breadcrumb-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+/* 右侧区域 */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+/* 功能地图按钮 - 品牌绿主题 */
+.feature-map-btn {
+  height: 32px;
+  padding: 0 16px;
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px var(--brand-primary-glow);
+  transition: all 0.3s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-map-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.feature-map-btn:hover::before {
+  left: 100%;
+}
+
+.feature-map-btn:hover {
+  background: var(--brand-primary-hover);
+  border-color: var(--brand-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--brand-primary-glow);
+}
+
+.feature-map-btn:active {
+  transform: translateY(0);
+}
+
+.feature-map-btn .btn-icon {
+  font-size: 16px;
+  margin-right: 6px;
+}
+
+.feature-map-btn .btn-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 图标按钮组 */
+.icon-button-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: var(--color-bg-elevated);
+  border-radius: 6px;
+  border: 1px solid var(--color-border-light);
+}
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: var(--color-text-secondary);
+  transition: var(--transition-hover);
+  position: relative;
+}
+
+.icon-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background: var(--brand-primary);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.icon-btn:hover {
+  color: var(--brand-primary);
+  background: var(--brand-primary-light);
+}
+
+.icon-btn:hover::before {
+  opacity: 0.08;
+}
+
+.icon-btn .anticon {
+  font-size: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 积分显示 - 橙色强调 */
+.credits-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, var(--brand-accent-light) 0%, #fffbe6 100%);
+  border: 1px solid #ffd591;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: var(--transition-hover);
+}
+
+.credits-display:hover {
+  background: linear-gradient(135deg, #ffe7ba 0%, #fff1b8 100%);
+  border-color: #ffc069;
+  transform: scale(1.05);
+}
+
+.credits-icon {
+  font-size: 14px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.credits-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--brand-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 通知按钮特殊样式 */
+.notification-btn {
+  position: relative;
+}
+
+.notification-btn::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 6px;
+  height: 6px;
+  background: var(--brand-accent);
+  border-radius: 50%;
+  opacity: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.notification-btn:hover::after {
+  opacity: 1;
+}
+
+/* 用户头像 */
+.user-avatar {
+  cursor: pointer;
+  border: 2px solid var(--color-border-light);
+  transition: var(--transition-hover);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.user-avatar:hover {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 4px var(--brand-primary-light), 0 4px 8px rgba(0, 0, 0, 0.12);
+  transform: scale(1.1);
+}
+
+/* VIP 按钮 - 金色渐变特效 */
+.vip-btn {
+  height: 32px;
+  padding: 0 16px;
+  background: linear-gradient(135deg, var(--vip-gradient-start) 0%, var(--vip-gradient-end) 100%);
+  border: none;
+  border-radius: 16px;
+  color: var(--vip-text);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+  transition: all 0.3s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.vip-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.vip-btn:hover::before {
+  opacity: 1;
+  animation: rotate 3s linear infinite;
+}
+
+.vip-btn:hover {
+  background: linear-gradient(135deg, #ffe033 0%, #ffc933 100%);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.vip-btn:active {
+  transform: translateY(0);
+}
+
+.vip-btn .vip-icon {
+  font-size: 14px;
+  margin-right: 4px;
+  display: inline-block;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.vip-btn .vip-text {
+  font-size: 13px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 新榜品牌标识 */
+.newrank-brand {
+  padding: 6px 12px;
+  border-left: 1px solid var(--color-border-light);
+  margin-left: 8px;
+}
+
+.newrank-brand .brand-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  letter-spacing: 1px;
+  transition: var(--transition-hover);
+  cursor: pointer;
+}
+
+.newrank-brand:hover .brand-text {
+  color: var(--brand-primary);
+}
+
+/* 旋转动画 */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 响应式适配 */
+@media (max-width: 1200px) {
+  .brand-subtitle {
+    display: none;
+  }
+
+  .icon-button-group {
+    gap: 2px;
+  }
+
+  .header-right .ant-space {
+    gap: 12px !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .app-header {
+    padding: 0 16px;
+  }
+
+  .breadcrumb-section {
+    display: none;
+  }
+
+  .icon-button-group .icon-btn:nth-child(3),
+  .icon-button-group .icon-btn:nth-child(4) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .feature-map-btn .btn-text {
+    display: none;
+  }
+
+  .feature-map-btn {
+    padding: 0 12px;
+  }
+
+  .credits-display {
+    padding: 4px 8px;
+  }
+
+  .newrank-brand {
+    display: none;
+  }
+}
