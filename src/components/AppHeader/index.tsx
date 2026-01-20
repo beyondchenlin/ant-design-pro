@@ -15,12 +15,12 @@ interface AppHeaderProps {
 }
 
 /**
- * 新视顶部导航栏
+ * 懒人同城号顶部导航栏
  * Neo-Chinese Tech Luxury Aesthetic
  *
  * 设计特色：
  * - 48px 精致高度，比标准更紧凑
- * - 品牌名"新视"使用玉绿色，象征新生与洞察
+ * - 品牌名"懒人同城号"使用玉绿色，象征新生与洞察
  * - VIP 按钮采用金色渐变，呼应传统金箔工艺
  * - 图标组采用统一 16px 尺寸，保持视觉节奏
  */
@@ -30,8 +30,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ onMenuClick }) => {
       {/* 左侧：品牌 Logo + 面包屑 */}
       <div className="header-left">
         <div className="logo-section">
-          <span className="brand-name">新视</span>
-          <span className="brand-subtitle">Video Discovery</span>
+          <span className="brand-name">懒人同城号</span>
+          <span className="brand-subtitle">Local Account Discovery</span>
         </div>
         <div className="breadcrumb-section">
           <MenuOutlined className="breadcrumb-icon" />
@@ -92,9 +92,9 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ onMenuClick }) => {
             <span className="vip-text">开通VIP</span>
           </Button>
 
-          {/* 新榜品牌标识 */}
+          {/* 懒人同城号品牌标识 */}
           <div className="newrank-brand">
-            <span className="brand-text">新榜</span>
+            <span className="brand-text">懒人同城号</span>
           </div>
         </Space>
       </div>

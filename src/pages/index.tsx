@@ -9,7 +9,7 @@ import './index.css';
 const { Content } = Layout;
 
 /**
- * 新视主布局
+ * 懒人同城号主布局
  * Neo-Chinese Tech Luxury Aesthetic
  *
  * 设计理念：
@@ -43,14 +43,14 @@ export default function IndexPage() {
             <div className="demo-container">
               <div className="demo-hero">
                 <h1 className="demo-title">
-                  <span className="title-main">新视</span>
-                  <span className="title-sub">Video Discovery Platform</span>
+                  <span className="title-main">懒人同城号</span>
+                  <span className="title-sub">Local Account Discovery Platform</span>
                 </h1>
                 <p className="demo-subtitle">
                   Neo-Chinese Tech Luxury Aesthetic
                 </p>
                 <div className="demo-description">
-                  <p>基于 Ant Design Pro 的视频号发现平台</p>
+                  <p>基于 Ant Design Pro 的同城号发现平台</p>
                   <p>融合现代科技与中国传统美学</p>
                 </div>
               </div>

@@ -25,7 +25,7 @@ const VipTag: React.FC = () => (
 );
 
 /**
- * 新视菜单配置
+ * 懒人同城号菜单配置
  * Neo-Chinese Tech Luxury Aesthetic
  *
  * 设计理念：

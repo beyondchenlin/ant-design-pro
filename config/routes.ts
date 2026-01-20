@@ -23,8 +23,8 @@ export default [
     ],
   },
   {
-    path: '/xinshi',
-    name: '新视演示',
+    path: '/lazytown',
+    name: '懒人同城号',
     icon: 'star',
     component: './index',
     layout: false,
@@ -60,7 +60,7 @@ export default [
   },
   {
     path: '/',
-    redirect: '/xinshi',
+    redirect: '/lazytown',
   },
   {
     path: '*',
