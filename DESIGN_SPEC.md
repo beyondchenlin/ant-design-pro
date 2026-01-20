@@ -3,7 +3,7 @@
 ## 1. 项目概述
 
 ### 1.1 设计目标
-基于 Ant Design Pro 设计语言，1:1 复刻视频号发现平台界面，实现左侧导航、中间地图展示、右侧排行榜的三栏布局结构。
+基于 Ant Design Pro 设计语言，1:1 复刻同城号发现平台界面，实现左侧导航、中间地图展示、右侧排行榜的三栏布局结构。
 
 ### 1.2 技术栈
 - **框架**: React 18+
@@ -112,7 +112,7 @@ export const AppHeader: React.FC = () => (
     {/* 左侧：品牌 Logo + 面包屑 */}
     <div className="header-left">
       <div className="logo-section">
-        <span className="brand-name">新视</span>
+        <span className="brand-name">懒人同城号</span>
       </div>
       <div className="breadcrumb-section">
         <span className="breadcrumb-icon">☰</span>
@@ -254,7 +254,7 @@ export const AppHeader: React.FC = () => (
 |------|------|------|
 | 整体高度 | 48px | 比标准 Ant Design 略矮 |
 | 背景色 | `#ffffff` | 纯白 |
-| 品牌名 "新视" | 20px, 600, `#52c41a` | 品牌绿色 |
+| 品牌名 "懒人同城号" | 20px, 600, `#52c41a` | 品牌绿色 |
 | 面包屑文字 | 14px, `#595959` | 次要文字色 |
 | 功能地图按钮 | 品牌绿底，白字 | Primary 样式 |
 | VIP 按钮 | 金色渐变 | 特殊强调 |
@@ -2161,7 +2161,7 @@ const RankingView = lazy(() => import('@/pages/RankingView'));
 **基于原型截图二次校准**
 
 - ✅ **更新 3.1 顶部导航栏**：
-  - 品牌名改为 "新视"（绿色）
+  - 品牌名改为 "懒人同城号"（绿色）
   - Header 高度改为 48px
   - 新增面包屑、功能地图按钮、设备图标组、VIP 按钮（金色渐变）
 - ✅ **更新 3.2 左侧菜单**：
