@@ -173,7 +173,7 @@ export const RankingPanel: React.FC<RankingPanelProps> = ({
         }
         bordered={false}
         style={{
-          width: '360px',
+          width: 360,
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
@@ -185,21 +185,20 @@ export const RankingPanel: React.FC<RankingPanelProps> = ({
             inset 0 1px 0 rgba(255, 255, 255, 0.05)
           `,
           backdropFilter: 'blur(16px)',
-          position: 'relative',
-          overflow: 'hidden',
         }}
-        headStyle={{
-          borderBottom: `1px solid ${mapColors.legend.border}`,
-          padding: '20px 22px',
-          background: 'transparent',
-          flex: '0 0 auto',
-        }}
-        bodyStyle={{
-          padding: 0,
-          flex: '1 1 auto',
-          overflow: 'hidden',
-          display: 'flex',
-          flexDirection: 'column',
+        styles={{
+          header: {
+            flex: '0 0 auto',
+            borderBottom: `1px solid rgba(82, 196, 26, 0.2)`,
+            padding: '16px 20px',
+          },
+          body: {
+            flex: '1 1 auto',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            padding: 0,
+          },
         }}
       >
       {/* 标签页 */}
@@ -223,7 +222,13 @@ export const RankingPanel: React.FC<RankingPanelProps> = ({
       />
 
       {/* 排行榜列表 */}
-      <div style={{ padding: '12px 20px 20px', flex: '1 1 auto', overflow: 'auto' }}>
+      <div
+        style={{
+          flex: '1 1 auto',
+          overflow: 'auto',
+          padding: '12px 20px 20px',
+        }}
+      >
         {filteredPoints.length === 0 ? (
           <Empty
             description="暂无数据"

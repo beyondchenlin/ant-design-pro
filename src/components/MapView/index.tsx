@@ -158,7 +158,8 @@ export const MapView: React.FC = () => {
       style={{
         position: 'relative',
         width: '100%',
-        height: '100vh',
+        height: '100%',
+        minHeight: 'calc(100vh - 64px)',
         background: mapColors.map.background,
         overflow: 'hidden',
       }}
@@ -187,9 +188,9 @@ export const MapView: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          top: '20px',
-          left: '20px',
-          maxWidth: 'min(400px, calc(100vw - 40px))',
+          top: 20,
+          left: 20,
+          maxWidth: 'min(400px, calc(100vw - 450px))',
           zIndex: 10,
         }}
       >
@@ -204,8 +205,8 @@ export const MapView: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          bottom: '20px',
-          left: '20px',
+          bottom: 20,
+          left: 20,
           zIndex: 10,
         }}
       >
@@ -220,8 +221,8 @@ export const MapView: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          top: '20px',
-          right: '400px',
+          top: 20,
+          right: 400,
           zIndex: 10,
         }}
       >
@@ -232,9 +233,10 @@ export const MapView: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          top: '20px',
-          right: '20px',
-          bottom: '20px',
+          top: 20,
+          right: 20,
+          bottom: 20,
+          width: 360,
           zIndex: 10,
           display: 'flex',
           flexDirection: 'column',

@@ -106,13 +106,15 @@ export const CityFilterCard: React.FC<CityFilterCardProps> = ({
           overflow: 'hidden',
           zIndex: 1,
         }}
-        headStyle={{
-          borderBottom: `1px solid ${mapColors.legend.border}`,
-          padding: '18px 22px',
-          background: 'transparent',
-        }}
-        bodyStyle={{
-          padding: '18px 22px',
+        styles={{
+          header: {
+            borderBottom: `1px solid ${mapColors.legend.border}`,
+            padding: '18px 22px',
+            background: 'transparent',
+          },
+          body: {
+            padding: '18px 22px',
+          },
         }}
       >
         {/* 装饰性纹理背景 */}
@@ -129,12 +131,7 @@ export const CityFilterCard: React.FC<CityFilterCardProps> = ({
           }}
         />
 
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '10px',
-          position: 'relative',
-        }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
           {HOT_CITIES.map((city) => {
             const isSelected = selectedCity === city.code;
             const count = city.code === 'all'
@@ -147,57 +144,36 @@ export const CityFilterCard: React.FC<CityFilterCardProps> = ({
                 onClick={() => handleCityClick(city.code)}
                 style={{
                   margin: 0,
-                  padding: '8px 18px',
+                  padding: '6px 14px',
                   fontSize: '13px',
                   fontWeight: isSelected ? 600 : 500,
                   cursor: 'pointer',
-                  borderRadius: '24px',
-                  border: `1px solid ${
-                    isSelected ? mapColors.accent.base : 'rgba(82, 196, 26, 0.4)'
-                  }`,
+                  borderRadius: '20px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  whiteSpace: 'nowrap',
+                  lineHeight: 1.4,
+                  height: 'auto',
+                  borderColor: isSelected ? '#ff7a00' : 'rgba(82, 196, 26, 0.4)',
                   background: isSelected
-                    ? `linear-gradient(135deg, ${mapColors.accent.surface}, rgba(255, 122, 0, 0.15))`
+                    ? 'linear-gradient(135deg, rgba(255, 122, 0, 0.15), rgba(255, 122, 0, 0.08))'
                     : 'rgba(82, 196, 26, 0.05)',
-                  color: isSelected
-                    ? mapColors.accent.base
-                    : mapColors.text.secondary,
-                  transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-                  boxShadow: isSelected
-                    ? `0 0 20px ${mapColors.accent.glow}, inset 0 0 12px rgba(255, 122, 0, 0.1)`
-                    : '0 2px 8px rgba(0, 0, 0, 0.2)',
-                  transform: isSelected ? 'scale(1.02)' : 'scale(1)',
-                }}
-                onMouseEnter={(e) => {
-                  if (!isSelected) {
-                    e.currentTarget.style.borderColor = mapColors.primary.light;
-                    e.currentTarget.style.color = mapColors.text.primary;
-                    e.currentTarget.style.background = 'rgba(82, 196, 26, 0.12)';
-                    e.currentTarget.style.boxShadow = `0 0 16px ${mapColors.primary.glow}`;
-                    e.currentTarget.style.transform = 'scale(1.02) translateY(-1px)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isSelected) {
-                    e.currentTarget.style.borderColor = 'rgba(82, 196, 26, 0.4)';
-                    e.currentTarget.style.color = mapColors.text.secondary;
-                    e.currentTarget.style.background = 'rgba(82, 196, 26, 0.05)';
-                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.2)';
-                    e.currentTarget.style.transform = 'scale(1)';
-                  }
+                  color: isSelected ? '#ff7a00' : 'rgba(255, 255, 255, 0.65)',
+                  boxShadow: isSelected ? '0 0 16px rgba(255, 122, 0, 0.3)' : 'none',
                 }}
               >
                 {city.name}
                 {count > 0 && (
                   <span
                     style={{
-                      marginLeft: '8px',
+                      marginLeft: '6px',
                       fontSize: '11px',
                       opacity: 0.9,
-                      padding: '2px 6px',
-                      borderRadius: '10px',
+                      padding: '1px 5px',
+                      borderRadius: '8px',
                       background: isSelected
-                        ? 'rgba(255, 122, 0, 0.2)'
-                        : 'rgba(82, 196, 26, 0.15)',
+                        ? 'rgba(255, 122, 0, 0.25)'
+                        : 'rgba(82, 196, 26, 0.2)',
                     }}
                   >
                     {count}
