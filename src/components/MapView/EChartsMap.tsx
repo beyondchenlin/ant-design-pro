@@ -4,7 +4,7 @@
  * Neo-Chinese Tech Luxury Aesthetic
  */
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import ReactEChartsCore from 'echarts-for-react/lib/core';
 import * as echarts from 'echarts/core';
 import { ScatterChart, EffectScatterChart, MapChart } from 'echarts/charts';
@@ -45,51 +45,50 @@ export const EChartsMap: React.FC<EChartsMapProps> = ({
 }) => {
   const chartRef = useRef<ReactEChartsCore>(null);
 
+  // 筛选后的点位数据（缓存）
+  const filteredPoints = useMemo(() => {
+    if (!data?.points) return [];
+    if (selectedCity && selectedCity !== 'all') {
+      return data.points.filter((point) => point.province === selectedCity);
+    }
+    return data.points;
+  }, [data?.points, selectedCity]);
+
   // 处理点击事件
   const handleChartClick = (params: any) => {
     if (params.componentType === 'series' && params.seriesType === 'effectScatter') {
-      const point = data?.points[params.dataIndex];
+      const point = filteredPoints[params.dataIndex];
       if (point && onPointClick) {
         onPointClick(point);
       }
     }
   };
 
-  // 准备散点数据
-  const getScatterData = () => {
-    if (!data?.points) return [];
+  // 准备散点数据（缓存）
+  const scatterData = useMemo(() => {
+    return filteredPoints.map((point) => ({
+      name: point.name,
+      value: point.value,
+      itemStyle: {
+        color:
+          point.id === activePointId
+            ? mapColors.nodes.selected
+            : point.id === hoveredPointId
+            ? mapColors.nodes.hover
+            : mapColors.nodes.normal,
+        shadowColor:
+          point.id === activePointId
+            ? mapColors.nodes.selectedGlow
+            : point.id === hoveredPointId
+            ? mapColors.nodes.hoverGlow
+            : mapColors.nodes.normalGlow,
+        shadowBlur: point.id === activePointId || point.id === hoveredPointId ? 20 : 10,
+      },
+    }));
+  }, [filteredPoints, activePointId, hoveredPointId]);
 
-    return data.points
-      .filter((point) => {
-        // 城市筛选
-        if (selectedCity && selectedCity !== 'all') {
-          return point.province === selectedCity;
-        }
-        return true;
-      })
-      .map((point) => ({
-        name: point.name,
-        value: point.value,
-        itemStyle: {
-          color:
-            point.id === activePointId
-              ? mapColors.nodes.selected
-              : point.id === hoveredPointId
-              ? mapColors.nodes.hover
-              : mapColors.nodes.normal,
-          shadowColor:
-            point.id === activePointId
-              ? mapColors.nodes.selectedGlow
-              : point.id === hoveredPointId
-              ? mapColors.nodes.hoverGlow
-              : mapColors.nodes.normalGlow,
-          shadowBlur: point.id === activePointId || point.id === hoveredPointId ? 20 : 10,
-        },
-      }));
-  };
-
-  // ECharts 配置
-  const getOption = () => {
+  // ECharts 配置（缓存）
+  const option = useMemo(() => {
     return {
       backgroundColor: mapColors.map.background,
       tooltip: {
@@ -167,13 +166,8 @@ export const EChartsMap: React.FC<EChartsMapProps> = ({
           name: '用户分布',
           type: 'effectScatter',
           coordinateSystem: 'geo',
-          data: getScatterData(),
-          symbolSize: (val: any, params: any) => {
-            const point = data?.points[params.dataIndex];
-            if (point?.id === activePointId) return MARKER_SIZES.selected;
-            if (point?.id === hoveredPointId) return MARKER_SIZES.hover;
-            return MARKER_SIZES.normal;
-          },
+          data: scatterData,
+          symbolSize: MARKER_SIZES.normal,
           showEffectOn: 'render',
           rippleEffect: {
             ...RIPPLE_CONFIG,
@@ -200,7 +194,7 @@ export const EChartsMap: React.FC<EChartsMapProps> = ({
         },
       ],
     };
-  };
+  }, [scatterData, selectedCity]);
 
   // 图表实例就绪回调
   useEffect(() => {
@@ -224,9 +218,9 @@ export const EChartsMap: React.FC<EChartsMapProps> = ({
       <ReactEChartsCore
         ref={chartRef}
         echarts={echarts}
-        option={getOption()}
+        option={option}
         style={{ width: '100%', height: '100%' }}
-        notMerge={true}
+        notMerge={false}
         lazyUpdate={true}
         onEvents={{
           click: handleChartClick,

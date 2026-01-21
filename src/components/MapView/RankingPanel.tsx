@@ -173,8 +173,10 @@ export const RankingPanel: React.FC<RankingPanelProps> = ({
         }
         bordered={false}
         style={{
-          width: '380px',
-          maxHeight: '540px',
+          width: '360px',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
           background: `linear-gradient(145deg, rgba(15, 22, 41, 0.98), rgba(26, 35, 50, 0.95))`,
           borderRadius: '18px',
           border: `1px solid ${mapColors.legend.border}`,
@@ -190,11 +192,14 @@ export const RankingPanel: React.FC<RankingPanelProps> = ({
           borderBottom: `1px solid ${mapColors.legend.border}`,
           padding: '20px 22px',
           background: 'transparent',
+          flex: '0 0 auto',
         }}
         bodyStyle={{
           padding: 0,
-          maxHeight: '440px',
-          overflowY: 'auto',
+          flex: '1 1 auto',
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
       {/* 标签页 */}
@@ -218,7 +223,7 @@ export const RankingPanel: React.FC<RankingPanelProps> = ({
       />
 
       {/* 排行榜列表 */}
-      <div style={{ padding: '12px 20px 20px' }}>
+      <div style={{ padding: '12px 20px 20px', flex: '1 1 auto', overflow: 'auto' }}>
         {filteredPoints.length === 0 ? (
           <Empty
             description="暂无数据"

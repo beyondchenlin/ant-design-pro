@@ -189,7 +189,7 @@ export const MapView: React.FC = () => {
           position: 'absolute',
           top: '20px',
           left: '20px',
-          maxWidth: '400px',
+          maxWidth: 'min(400px, calc(100vw - 40px))',
           zIndex: 10,
         }}
       >
@@ -200,24 +200,12 @@ export const MapView: React.FC = () => {
         />
       </div>
 
-      {/* 右上角：图例 */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '20px',
-          right: '20px',
-          zIndex: 10,
-        }}
-      >
-        <MapLegend />
-      </div>
-
-      {/* 右下角：地图控制 */}
+      {/* 左下角：地图控制 */}
       <div
         style={{
           position: 'absolute',
           bottom: '20px',
-          right: '20px',
+          left: '20px',
           zIndex: 10,
         }}
       >
@@ -228,13 +216,28 @@ export const MapView: React.FC = () => {
         />
       </div>
 
-      {/* 左下角：排行榜面板 */}
+      {/* 右上角：图例 */}
       <div
         style={{
           position: 'absolute',
-          bottom: '20px',
-          left: '20px',
+          top: '20px',
+          right: '400px',
           zIndex: 10,
+        }}
+      >
+        <MapLegend />
+      </div>
+
+      {/* 右侧：排行榜面板 */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '20px',
+          right: '20px',
+          bottom: '20px',
+          zIndex: 10,
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
         <RankingPanel
