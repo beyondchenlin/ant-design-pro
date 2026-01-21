@@ -56,7 +56,7 @@ export const EChartsMap: React.FC<EChartsMapProps> = ({
 
   // 处理点击事件
   const handleChartClick = (params: any) => {
-    if (params.componentType === 'series' && params.seriesType === 'effectScatter') {
+    if (params.componentType === 'series' && (params.seriesType === 'scatter' || params.seriesType === 'effectScatter')) {
       const point = filteredPoints[params.dataIndex];
       if (point && onPointClick) {
         onPointClick(point);
@@ -64,28 +64,34 @@ export const EChartsMap: React.FC<EChartsMapProps> = ({
     }
   };
 
-  // 准备散点数据（缓存）
+  // 准备散点数据（缓存）- 移除 hoveredPointId 依赖，用 ECharts emphasis 处理悬停
   const scatterData = useMemo(() => {
     return filteredPoints.map((point) => ({
       name: point.name,
       value: point.value,
       itemStyle: {
-        color:
-          point.id === activePointId
-            ? mapColors.nodes.selected
-            : point.id === hoveredPointId
-            ? mapColors.nodes.hover
-            : mapColors.nodes.normal,
-        shadowColor:
-          point.id === activePointId
-            ? mapColors.nodes.selectedGlow
-            : point.id === hoveredPointId
-            ? mapColors.nodes.hoverGlow
-            : mapColors.nodes.normalGlow,
-        shadowBlur: point.id === activePointId || point.id === hoveredPointId ? 20 : 10,
+        color: point.id === activePointId ? mapColors.nodes.selected : mapColors.nodes.normal,
+        shadowColor: point.id === activePointId ? mapColors.nodes.selectedGlow : mapColors.nodes.normalGlow,
+        shadowBlur: point.id === activePointId ? 20 : 10,
       },
     }));
-  }, [filteredPoints, activePointId, hoveredPointId]);
+  }, [filteredPoints, activePointId]);
+
+  // 选中点的涟漪效果数据（只有选中点才有动画）
+  const activePointData = useMemo(() => {
+    if (!activePointId) return [];
+    const point = filteredPoints.find((p) => p.id === activePointId);
+    if (!point) return [];
+    return [{
+      name: point.name,
+      value: point.value,
+      itemStyle: {
+        color: mapColors.nodes.selected,
+        shadowColor: mapColors.nodes.selectedGlow,
+        shadowBlur: 20,
+      },
+    }];
+  }, [filteredPoints, activePointId]);
 
   // ECharts 配置（缓存）
   const option = useMemo(() => {
@@ -162,22 +168,23 @@ export const EChartsMap: React.FC<EChartsMapProps> = ({
         },
       },
       series: [
+        // 普通散点（无动画，高性能）
         {
           name: '用户分布',
-          type: 'effectScatter',
+          type: 'scatter',
           coordinateSystem: 'geo',
           data: scatterData,
           symbolSize: MARKER_SIZES.normal,
-          showEffectOn: 'render',
-          rippleEffect: {
-            ...RIPPLE_CONFIG,
-            color: mapColors.primary.glow,
-          },
           label: {
             show: false,
           },
           emphasis: {
-            scale: true,
+            scale: 1.5,
+            itemStyle: {
+              color: mapColors.nodes.hover,
+              shadowColor: mapColors.nodes.hoverGlow,
+              shadowBlur: 20,
+            },
             label: {
               show: true,
               position: 'top',
@@ -192,9 +199,26 @@ export const EChartsMap: React.FC<EChartsMapProps> = ({
             },
           },
         },
+        // 选中点涟漪效果（只有1个点有动画）
+        {
+          name: '选中点',
+          type: 'effectScatter',
+          coordinateSystem: 'geo',
+          data: activePointData,
+          symbolSize: MARKER_SIZES.selected,
+          showEffectOn: 'render',
+          rippleEffect: {
+            ...RIPPLE_CONFIG,
+            color: mapColors.accent.glow,
+          },
+          zlevel: 1,
+          label: {
+            show: false,
+          },
+        },
       ],
     };
-  }, [scatterData, selectedCity]);
+  }, [scatterData, activePointData, selectedCity]);
 
   // 图表实例就绪回调
   useEffect(() => {
