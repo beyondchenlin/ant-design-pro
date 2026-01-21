@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国地图测试 - ECharts</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+        }
+        h1 {
+            text-align: center;
+            color: #52c41a;
+            margin-bottom: 20px;
+        }
+        #map {
+            width: 100%;
+            height: 800px;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(82, 196, 26, 0.15);
+        }
+        .info {
+            text-align: center;
+            margin-top: 20px;
+            color: #8c8c8c;
+        }
+    </style>
+</head>
+<body>
+    <h1>🗺️ 中国地图显示测试</h1>
+    <div id="map"></div>
+    <div class="info">
+        <p>使用标准 GeoJSON 格式的中国地图数据</p>
+        <p>数据来源: china-map-echarts (npm package)</p>
+    </div>
+
+    <script>
+        // 初始化 ECharts 实例
+        const chart = echarts.init(document.getElementById('map'));
+
+        // 加载中国地图 GeoJSON 数据
+        fetch('/china.json')
+            .then(response => response.json())
+            .then(chinaGeoJSON => {
+                // 注册地图
+                echarts.registerMap('china', chinaGeoJSON);
+
+                // 配置项
+                const option = {
+                    backgroundColor: '#0a0e27',
+                    tooltip: {
+                        trigger: 'item',
+                        backgroundColor: 'rgba(10, 14, 39, 0.95)',
+                        borderColor: '#52c41a',
+                        borderWidth: 1,
+                        textStyle: {
+                            color: '#ffffff',
+                            fontSize: 14,
+                        },
+                        formatter: (params) => {
+                            if (params.componentType === 'geo') {
+                                return '<div style="padding: 4px 8px;"><div style="font-weight: 600;">' + params.name + '</div></div>';
+                            }
+                            return '';
+                        },
+                    },
+                    geo: {
+                        map: 'china',
+                        roam: true,
+                        aspectScale: 0.75,
+                        scaleLimit: { min: 1, max: 5 },
+                        zoom: 1.2,
+                        center: [104.114129, 37.550339],
+                        itemStyle: {
+                            areaColor: '#1a1f3a',
+                            borderColor: '#52c41a',
+                            borderWidth: 1,
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                areaColor: '#2a3f5a',
+                                borderColor: '#73d13d',
+                                borderWidth: 2,
+                            },
+                            label: {
+                                show: true,
+                                color: '#ffffff',
+                                fontSize: 14,
+                                fontWeight: 600,
+                            },
+                        },
+                    },
+                    series: [{
+                        name: '测试散点',
+                        type: 'effectScatter',
+                        coordinateSystem: 'geo',
+                        data: [
+                            { name: '北京', value: [116.4, 39.9, 100] },
+                            { name: '上海', value: [121.5, 31.2, 100] },
+                            { name: '广州', value: [113.3, 23.1, 100] },
+                            { name: '成都', value: [104.1, 30.7, 100] },
+                            { name: '杭州', value: [120.2, 30.3, 100] },
+                        ],
+                        symbolSize: 12,
+                        showEffectOn: 'render',
+                        rippleEffect: { brushType: 'stroke', scale: 3, period: 4 },
+                        itemStyle: {
+                            color: '#52c41a',
+                            shadowColor: 'rgba(82, 196, 26, 0.5)',
+                            shadowBlur: 10,
+                        },
+                    }],
+                };
+
+                chart.setOption(option);
+                window.addEventListener('resize', () => chart.resize());
+                console.log('✅ 地图加载成功！特征数量:', chinaGeoJSON.features.length);
+            })
+            .catch(error => {
+                console.error('❌ 地图加载失败:', error);
+                document.getElementById('map').innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ff4d4f;"><div style="text-align: center;"><h2>地图加载失败</h2><p>' + error.message + '</p></div></div>';
+            });
+    </script>
+</body>
+</html>

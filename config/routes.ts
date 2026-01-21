@@ -30,6 +30,20 @@ export default [
     layout: false,
   },
   {
+    path: '/discover/map',
+    name: '地域找号',
+    icon: 'environment',
+    component: './discover/map',
+    layout: false,
+  },
+  {
+    path: '/map',
+    name: '用户地图',
+    icon: 'environment',
+    component: './map',
+    layout: false,
+  },
+  {
     path: '/welcome',
     name: 'welcome',
     icon: 'smile',

@@ -13,7 +13,17 @@
       "Bash(git remote add:*)",
       "Bash(git push:*)",
       "Bash(git fetch:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(npm install:*)",
+      "Bash(dir:*)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_take_screenshot",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(npm run dev:*)",
+      "Bash(timeout /t 15 /nobreak)",
+      "Bash(move \"D:\\\\demo\\\\demo1\\\\ant-design-pro-master\\\\test-map.html\" \"D:\\\\demo\\\\demo1\\\\ant-design-pro-master\\\\public\\\\test-map.html\")",
+      "Bash(node -e:*)"
     ]
   }
 }
